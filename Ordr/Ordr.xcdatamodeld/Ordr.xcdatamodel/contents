@@ -1,4 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="16B2657" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Address" representedClassName="Ordr.Address" syncable="YES">
+        <attribute name="country" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="postCode" attributeType="String" syncable="YES"/>
+        <attribute name="state" attributeType="String" syncable="YES"/>
+        <attribute name="streetLineOne" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="streetLineTwo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="town" attributeType="String" syncable="YES"/>
+        <relationship name="vendor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vendor" inverseName="addresses" inverseEntity="Vendor" syncable="YES"/>
+    </entity>
+    <entity name="Category" representedClassName="Category" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="productLine" maxCount="1" deletionRule="Nullify" destinationEntity="ProductLine" inverseName="categories" inverseEntity="ProductLine" syncable="YES"/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductItem" inverseName="category" inverseEntity="ProductItem" syncable="YES"/>
+    </entity>
+    <entity name="EmailAddress" representedClassName="Ordr.EmailAddress" syncable="YES">
+        <attribute name="address" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="vendor" maxCount="1" deletionRule="Nullify" destinationEntity="Vendor" inverseName="emailAddresses" inverseEntity="Vendor" syncable="YES"/>
+    </entity>
+    <entity name="MoneyCoreData" representedClassName="Ordr.MoneyCoreData" syncable="YES">
+        <attribute name="cent" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="dollar" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="sign" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="productItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProductItem" inverseName="price" inverseEntity="ProductItem" syncable="YES"/>
+    </entity>
+    <entity name="PhoneNumber" representedClassName="Ordr.PhoneNumber" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" attributeType="String" syncable="YES"/>
+        <relationship name="vendor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Vendor" inverseName="phoneNumbers" inverseEntity="Vendor" syncable="YES"/>
+    </entity>
+    <entity name="ProductItem" representedClassName="Ordr.ProductItem" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="products" inverseEntity="Category" syncable="YES"/>
+        <relationship name="price" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MoneyCoreData" inverseName="productItem" inverseEntity="MoneyCoreData" syncable="YES"/>
+        <relationship name="productLine" maxCount="1" deletionRule="Nullify" destinationEntity="ProductLine" inverseName="products" inverseEntity="ProductLine" syncable="YES"/>
+    </entity>
+    <entity name="ProductLine" representedClassName="Ordr.ProductLine" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="productLine" inverseEntity="Category" syncable="YES"/>
+        <relationship name="products" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductItem" inverseName="productLine" inverseEntity="ProductItem" syncable="YES"/>
+        <relationship name="vendor" maxCount="1" deletionRule="Nullify" destinationEntity="Vendor" inverseName="productLines" inverseEntity="Vendor" syncable="YES"/>
+    </entity>
+    <entity name="Vendor" representedClassName="Ordr.Vendor" syncable="YES">
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="addresses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Address" inverseName="vendor" inverseEntity="Address" syncable="YES"/>
+        <relationship name="emailAddresses" toMany="YES" deletionRule="Nullify" destinationEntity="EmailAddress" inverseName="vendor" inverseEntity="EmailAddress" syncable="YES"/>
+        <relationship name="phoneNumbers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PhoneNumber" inverseName="vendor" inverseEntity="PhoneNumber" syncable="YES"/>
+        <relationship name="productLines" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ProductLine" inverseName="vendor" inverseEntity="ProductLine" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Address" positionX="-542" positionY="-135" width="128" height="163"/>
+        <element name="Category" positionX="-200" positionY="216" width="128" height="88"/>
+        <element name="EmailAddress" positionX="-524" positionY="36" width="128" height="88"/>
+        <element name="MoneyCoreData" positionX="61" positionY="201" width="128" height="105"/>
+        <element name="PhoneNumber" positionX="-506" positionY="162" width="128" height="88"/>
+        <element name="ProductItem" positionX="-153" positionY="371" width="128" height="133"/>
+        <element name="ProductLine" positionX="-533" positionY="297" width="128" height="103"/>
+        <element name="Vendor" positionX="-758" positionY="39" width="128" height="150"/>
+    </elements>
 </model>
